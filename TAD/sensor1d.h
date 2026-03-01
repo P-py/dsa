@@ -1,7 +1,7 @@
 typedef struct {
 	float dados[10];
 	int qtd;
-}
+} Sensor1D;
 
 void s_init(Sensor1D* s);
 void s_add(Sensor1D* s, float valor);
