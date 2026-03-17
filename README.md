@@ -1,64 +1,35 @@
 # Data Structures and Algorithms in C
 
-An educational repository implementing fundamental data structures as Abstract Data Types (ADTs) in C.
+An educational repository implementing fundamental data structures as Abstract Data Types (ADTs) in C based on the Data Structure & Algorithms class @ [Faculdade de Engenharia de Sorocaba (FACENS)](https://facens.br/cursos/graduacao/engenharia-de-computacao/)
 
 ## Structure
 
+Each data structure lives in its own folder following this pattern:
+
 ```
-dsa/
-├── TAD/          # Sensor1D - final implementation
-├── tad/          # Sensor1D - exercise/learning template
-├── bag/          # Bag collection data structure
-└── linkedlist/   # (planned)
+module/
+├── module.h    # interface — type definitions and function declarations
+├── module.c    # implementation
+└── main.c      # entry point and usage example
 ```
 
-## Implementations
+## Building
 
-### Sensor1D (`TAD/`)
+Compile from the **project root**, passing both `.c` files:
 
-A fixed-size array-based structure for storing and processing 1D sensor readings (capacity: 10).
-
-| Function | Description |
-|---|---|
-| `s_init()` | Initialize sensor |
-| `s_add(val)` | Add a reading |
-| `s_media()` | Calculate average |
-| `s_max()` | Find maximum reading |
-| `s_print()` | Print all readings |
-
-**Compile & run:**
 ```sh
-gcc TAD/sensor1d.c TAD/main.c -o sensor_app
-./sensor_app
+gcc -Wall -Wextra -g <module>/<module>.c <module>/main.c -o <output>
 ```
 
----
+Or use `make` if a `Makefile` is present:
 
-### Bag (`bag/`)
-
-An unordered collection that supports duplicate elements (capacity: 50 integers). Uses `-1` as a sentinel for empty slots.
-
-| Function | Description |
-|---|---|
-| `init()` | Initialize empty bag |
-| `insert(val)` | Add element |
-| `delete(val)` | Remove first occurrence |
-| `check(val)` | Count occurrences |
-| `size()` | Get element count |
-| `printall()` | Display all elements |
-
-**Compile & run:**
 ```sh
-gcc bag/bag.c bag/aplicacaoBag.c -o bag_app
-./bag_app
+make          # build all
+make clean    # remove binaries
 ```
 
----
-
-### Linked List (`linkedlist/`)
-
-Planned — directory reserved for future implementation.
+For the full guide — prerequisites, Makefile template, compiler error explanations, and instructions for adding new modules — see [`docs/building-and-running.md`](docs/building-and-running.md).
 
 ## License
 
-MIT License — Copyright 2026 Pedro
+MIT License — Copyright 2026 @ Pedro Salviano Santos

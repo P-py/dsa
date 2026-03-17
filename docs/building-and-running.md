@@ -1,8 +1,5 @@
-# Building and Running C Projects — Gold Standard Guide
-
+# Building and Running C Projects
 This guide covers how to compile and run the `.c` and `.h` files in this repository using GCC, both manually and with a Makefile.
-
----
 
 ## Prerequisites
 
@@ -28,8 +25,6 @@ Verify:
 gcc --version
 ```
 
----
-
 ## How C Multi-File Projects Work
 
 Each module in this repo follows the same pattern:
@@ -44,8 +39,6 @@ module/
 The `.h` file is the **interface** — it tells `main.c` what types and functions exist.
 The `.c` file is the **implementation** — it defines how those functions work.
 You must compile **both** `.c` files together so the linker can resolve all symbols.
-
----
 
 ## Manual Compilation (GCC)
 
@@ -71,8 +64,6 @@ Media = 20.75
 Maximo = 23.50
 ```
 
----
-
 ### Bag (`bag/`)
 
 ```sh
@@ -96,8 +87,6 @@ O tamanho atual da bag: 0
 Digite uma opcao:
 ```
 
----
-
 ## Recommended GCC Flags
 
 For development and learning, always compile with warnings and debug info enabled:
@@ -113,8 +102,6 @@ gcc -Wall -Wextra -g bag/bag.c bag/aplicacaoBag.c -o bag_app
 | `-Wextra` | Enable extra warnings |
 | `-g` | Include debug symbols (needed for `gdb`) |
 | `-o <name>` | Set the output binary name |
-
----
 
 ## Building with a Makefile
 
@@ -149,8 +136,6 @@ make bag      # build only bag_app
 make clean    # remove compiled binaries
 ```
 
----
-
 ## Understanding Compiler Errors
 
 ### `undefined reference to 'function_name'`
@@ -174,8 +159,6 @@ A function is called before it is declared. Ensure the `.h` file is included at 
 #include "sensor1d.h"
 ```
 
----
-
 ## Adding a New Module
 
 Follow this pattern when creating a new data structure (e.g., `linkedlist`):
@@ -198,8 +181,6 @@ Follow this pattern when creating a new data structure (e.g., `linkedlist`):
    linkedlist: linkedlist/linkedlist.c linkedlist/main.c
    	$(CC) $(CFLAGS) linkedlist/linkedlist.c linkedlist/main.c -o linkedlist_app
    ```
-
----
 
 ## Quick Reference
 
