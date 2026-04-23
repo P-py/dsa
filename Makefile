@@ -27,6 +27,7 @@ APPS := \
     infixtopostfix \
     bst \
     abb \
+    avl \
     palindrome \
     problem2
 
@@ -38,6 +39,7 @@ dynamicstack_SRCS   := dynamicstack/dynamicstack.c dynamicstack/main.c
 infixtopostfix_SRCS := infixtopostfix/infixtopostfix.c infixtopostfix/main.c
 bst_SRCS            := bst/bst.c bst/main.c
 abb_SRCS            := abb/abb.c abb/main.c
+avl_SRCS            := avl/avl.c avl/main.c
 palindrome_SRCS     := problems/palindrome.c
 problem2_SRCS       := problems/problem2.c
 
