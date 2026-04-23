@@ -45,12 +45,12 @@ You must compile **both** `.c` files together so the linker can resolve all symb
 ### Sensor1D (`TAD/`)
 
 ```sh
-gcc TAD/sensor1d.c TAD/main.c -o sensor_app
+gcc TAD/sensor1d.c TAD/main.c -o build/sensor1d
 ```
 
 Run:
 ```sh
-./sensor_app
+./build/sensor1d
 ```
 
 Expected session:
@@ -67,12 +67,12 @@ Maximo = 23.50
 ### Bag (`bag/`)
 
 ```sh
-gcc bag/bag.c bag/aplicacaoBag.c -o bag_app
+gcc bag/bag.c bag/aplicacaoBag.c -o build/bag
 ```
 
 Run:
 ```sh
-./bag_app
+./build/bag
 ```
 
 Expected session:
@@ -92,8 +92,8 @@ Digite uma opcao:
 For development and learning, always compile with warnings and debug info enabled:
 
 ```sh
-gcc -Wall -Wextra -g TAD/sensor1d.c TAD/main.c -o sensor_app
-gcc -Wall -Wextra -g bag/bag.c bag/aplicacaoBag.c -o bag_app
+gcc -Wall -Wextra -g TAD/sensor1d.c TAD/main.c -o build/sensor1d
+gcc -Wall -Wextra -g bag/bag.c bag/aplicacaoBag.c -o build/bag
 ```
 
 | Flag | Purpose |
@@ -107,22 +107,28 @@ gcc -Wall -Wextra -g bag/bag.c bag/aplicacaoBag.c -o bag_app
 
 A Makefile automates compilation so you don't have to retype commands.
 
-Create a file named `Makefile` at the root of the project:
+Create a file named `Makefile` at the root of the project. Binaries go into
+a `build/` directory so their names can match the module's source folder
+without colliding with it:
 
 ```makefile
-CC     = gcc
-CFLAGS = -Wall -Wextra -g
+CC        = gcc
+CFLAGS    = -Wall -Wextra -g
+BUILD_DIR = build
 
-all: sensor bag
+all: $(BUILD_DIR)/sensor1d $(BUILD_DIR)/bag
 
-sensor: TAD/sensor1d.c TAD/main.c
-	$(CC) $(CFLAGS) TAD/sensor1d.c TAD/main.c -o sensor_app
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
-bag: bag/bag.c bag/aplicacaoBag.c
-	$(CC) $(CFLAGS) bag/bag.c bag/aplicacaoBag.c -o bag_app
+$(BUILD_DIR)/sensor1d: TAD/sensor1d.c TAD/main.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) TAD/sensor1d.c TAD/main.c -o $@
+
+$(BUILD_DIR)/bag: bag/bag.c bag/aplicacaoBag.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) bag/bag.c bag/aplicacaoBag.c -o $@
 
 clean:
-	rm -f sensor_app bag_app
+	rm -rf $(BUILD_DIR)
 ```
 
 > **Important:** The indentation in a Makefile must use **tabs**, not spaces.
@@ -130,10 +136,10 @@ clean:
 ### Usage
 
 ```sh
-make          # build all targets
-make sensor   # build only sensor_app
-make bag      # build only bag_app
-make clean    # remove compiled binaries
+make                  # build all targets
+make build/sensor1d   # build only the sensor1d binary
+make build/bag        # build only the bag binary
+make clean            # remove the build/ directory
 ```
 
 ## Understanding Compiler Errors
@@ -143,10 +149,10 @@ You forgot to include the implementation `.c` file in the compile command.
 
 ```sh
 # Wrong — missing sensor1d.c
-gcc TAD/main.c -o sensor_app
+gcc TAD/main.c -o build/sensor1d
 
 # Correct
-gcc TAD/sensor1d.c TAD/main.c -o sensor_app
+gcc TAD/sensor1d.c TAD/main.c -o build/sensor1d
 ```
 
 ### `fatal error: 'module.h' file not found`
@@ -174,12 +180,12 @@ Follow this pattern when creating a new data structure (e.g., `linkedlist`):
    ```
 4. Compile:
    ```sh
-   gcc -Wall -Wextra -g linkedlist/linkedlist.c linkedlist/main.c -o linkedlist_app
+   gcc -Wall -Wextra -g linkedlist/linkedlist.c linkedlist/main.c -o build/linkedlist
    ```
 5. Add a target to the `Makefile`:
    ```makefile
-   linkedlist: linkedlist/linkedlist.c linkedlist/main.c
-   	$(CC) $(CFLAGS) linkedlist/linkedlist.c linkedlist/main.c -o linkedlist_app
+   $(BUILD_DIR)/linkedlist: linkedlist/linkedlist.c linkedlist/main.c | $(BUILD_DIR)
+   	$(CC) $(CFLAGS) linkedlist/linkedlist.c linkedlist/main.c -o $@
    ```
 
 ## Quick Reference

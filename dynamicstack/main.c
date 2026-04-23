@@ -7,10 +7,10 @@
  * release all heap memory cleanly.
  *
  * Compile:
- *   gcc -Wall -Wextra -g dynamicstack/dynamicstack.c dynamicstack/main.c -o dynamicstack_app
+ *   gcc -Wall -Wextra -g dynamicstack/dynamicstack.c dynamicstack/main.c -o build/dynamicstack
  *
  * Run:
- *   ./dynamicstack_app
+ *   ./build/dynamicstack
  */
 
 #include <stdio.h>

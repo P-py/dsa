@@ -6,10 +6,10 @@
  * operation manually and observe the results.
  *
  * Compile:
- *   gcc -Wall -Wextra -g staticstack/staticstack.c staticstack/main.c -o staticstack_app
+ *   gcc -Wall -Wextra -g staticstack/staticstack.c staticstack/main.c -o build/staticstack
  *
  * Run:
- *   ./staticstack_app
+ *   ./build/staticstack
  */
 
 #include <stdio.h>

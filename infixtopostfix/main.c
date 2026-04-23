@@ -12,10 +12,10 @@
  *   Resultado: 14
  *
  * Compile:
- *   gcc -Wall -Wextra -g infixtopostfix/infixtopostfix.c infixtopostfix/main.c -o itp_app
+ *   gcc -Wall -Wextra -g infixtopostfix/infixtopostfix.c infixtopostfix/main.c -o build/infixtopostfix
  *
  * Run:
- *   ./itp_app
+ *   ./build/infixtopostfix
  */
 
 #include <stdio.h>
